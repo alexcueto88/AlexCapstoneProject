@@ -1,11 +1,14 @@
+import React from "react";
+import { PublicView } from "./PublicView";
+import { InstructorsView } from "./InstructorsView";
+
 export const ApplicationViews = () => {
+  const localProjectUser = localStorage.getItem("capstone_user");
+  const projectUserObject = JSON.parse(localProjectUser);
 
-  const localProjectUser = localStorage.getItem("project_user")
-  const projectUserObject = JSON.parse(localProjectUser)
-
-  if(projectUserObject.staff){
-    return "<h1>Staff Views</h1>"
+  if (projectUserObject) {
+    return <InstructorsView />;
   } else {
-    return "<h1>Patron Views</h1>"
+    return <PublicView />;
   }
-}
+};

@@ -1,4 +1,5 @@
-import { NashvilleDanceScene } from "./components/CapstoneTemplate";
+import React from "react";
+import { NashvilleDanceScene } from "./components/NashvilleDanceScene";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
