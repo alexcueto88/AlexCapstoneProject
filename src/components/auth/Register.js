@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
@@ -6,8 +7,9 @@ export const Register = (props) => {
   const [user, setUser] = useState({
     email: "",
     fullName: "",
-  });
-  let navigate = useNavigate();
+    staff: false
+  })
+  let navigate = useNavigate()
 
   const registerNewUser = () => {
     return fetch("http://localhost:8088/users", {
