@@ -8,9 +8,9 @@ export const InstructorsPortal = () => {
       <div className="background">
         <h2 className="headerInstructorsPortal">Instructors Portal</h2>
         <AddEvent />
-        <p className="portal-info-paragraph">
+        {/* <p className="portal-info-paragraph">
           This is the Instructors Portal Page.
-        </p>
+        </p> */}
       </div>
     </>
   );
