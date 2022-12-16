@@ -5,22 +5,45 @@ import "./AddEventForm.css";
 
 export const AddEvent = () => {
   const [event, setEvent] = useState({
-    eventDescription: "",
-   
+    danceStyle: "",
+    eventName: "",
+    eventDate: "",
+    eventStartTime: "",
+    eventEndTime:"",
+    eventLocation: "",
+    eventPrice: "",
+    eventImage: ""
+           
   });
 
   const navigate = useNavigate();
+  const [danceStyle, setDanceStyle] = useState ([])
 
-  const localProjectUser = localStorage.getItem("project_user");
+  const localProjectUser = localStorage.getItem("capstone_user");
   const projectUserObject = JSON.parse(localProjectUser);
 
   const handleSaveButtonClick = (e) => {
     e.preventDefault();
 
     const eventToSendToAPI = {
-        eventDescription: event.eventDescription
+        danceStyle: event.danceStyle,
+        eventName: event.eventName,
+        eventDate: event.eventDate,
+        eventStartTime: event.eventStartTime,
+        eventEndTime: event.eventEndTime,
+        eventLocation: event.eventLocation,
+        eventPrice: event.eventPrice,
+        eventImage: event.eventImage
       
     };
+
+    useEffect (() => {
+      fetch (`http://localhost:8088/danceStyle`)
+      .then((response) => response.json())
+      .then((danceStyleArray) => {
+        setDanceStyle(danceStyleArray);
+      });
+    }, []);
 
     return fetch(`http://localhost:8088/events`, {
       method: "POST",
@@ -31,7 +54,7 @@ export const AddEvent = () => {
     })
       .then((response) => response.json())
       .then(() => {
-        navigate("/StaffUpcomingEvents");
+        navigate("/");
       });
   };
 
@@ -41,8 +64,18 @@ export const AddEvent = () => {
       <div className="formContainer">
         <fieldset>
           <div className="form-group">
-            <label htmlFor="attractionName">Name:</label>
-            <input
+            <label>Dance Style:</label>
+            <select 
+              className="danceStyle-selector"
+              defaultValue={event.danceStyle}
+              onChange={(e) => setTitle(e.target.value)}
+            
+            >
+
+
+
+
+            </select>
               required
               autoFocus
               type="text"

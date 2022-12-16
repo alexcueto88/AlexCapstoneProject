@@ -18,12 +18,12 @@ export const PublicView = () => {
           </>
         }
       >
-        <Route path="Home" element={<Home />} />
-        <Route path="UpcomingEvents" element={<UpcomingEvents />} />
-        <Route path="FindAClass" element={<FindAClass />} />
-        <Route path="Instructors" element={<Instructors />} />
-        <Route path="PhotoGallery" element={<PhotoGallery />} />
-        <Route path="Login" element={<Login />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/UpcomingEvents" element={<UpcomingEvents />} />
+        <Route path="/FindAClass" element={<FindAClass />} />
+        <Route path="/Instructors" element={<Instructors />} />
+        <Route path="/PhotoGallery" element={<PhotoGallery />} />
+        <Route path="/Login" element={<Login />} />
       </Route>
     </Routes>
   );

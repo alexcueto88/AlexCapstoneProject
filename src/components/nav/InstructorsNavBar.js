@@ -5,12 +5,14 @@ import "./NavBar.css";
 export const InstructorsNavBar = () => {
   const navigate = useNavigate();
 
+
+
   return (
     <div className="navImgContainer">
       <div className="navBarLinks">
         <div className="navbar__item active">
-          <Link className="navbar__link" to="/Home">
-            Home
+          <Link className="navbar__link" to="/InstructorsPortal">
+            InstructorsPortal
           </Link>
         </div>
         <div className="navbar__item active">
@@ -22,24 +24,24 @@ export const InstructorsNavBar = () => {
           <Link className="navbar__link" to="/FindAClass">
             Find A Class
           </Link>
-        </div>
-        <div className="navbar__item active">
+        </div> 
+        {/* <div className="navbar__item active">
           <Link className="navbar__link" to="/Instructors">
             Instructor
-          </Link>
-        </div>
-        <div className="navbar__item active">
+          </Link> */}
+        {/* </div> */}
+        {/* <div className="navbar__item active">
           <Link className="navbar__link" to="/PhotoGallery">
             Photo Gallery
           </Link>
         </div>
 
         
-        <div className="navbar__item active">
+        {/* <div className="navbar__item active">
           <Link className="navbar__link" to="/Login">
             Log In
           </Link>
-        </div>
+        </div> */}
  
  
 
@@ -50,7 +52,7 @@ export const InstructorsNavBar = () => {
               to=""
               onClick={() => {
                 localStorage.removeItem("capstone_user");
-                navigate("/", { replace: true });
+                navigate("/Home", { replace: true });
               }}
             >
               Logout

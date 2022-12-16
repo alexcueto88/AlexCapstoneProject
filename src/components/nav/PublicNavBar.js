@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
 export const PublicNavBar = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <div className="navImgContainer">

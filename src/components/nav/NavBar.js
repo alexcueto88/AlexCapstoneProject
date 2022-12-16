@@ -4,7 +4,7 @@ import { InstructorsNavBar } from "./InstructorsNavBar";
 import "./NavBar.css"
 
 export const NavBar = () => {
-  const localProjectUser = localStorage.getItem("project_user");
+  const localProjectUser = localStorage.getItem("capstone_user");
   const projectUserObject = JSON.parse(localProjectUser);
 
   if (projectUserObject) {
