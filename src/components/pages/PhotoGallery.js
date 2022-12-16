@@ -1,5 +1,5 @@
 import React from "react";
-import "./PhotoGallery.css";
+// import "./PhotoGallery.css";
 
 export const PhotoGallery = () => {
   return (

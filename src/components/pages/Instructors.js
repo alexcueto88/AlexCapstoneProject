@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Instructors.css";
 
 export const Instructors = () => {
+  const [instructor, setInstructors] = useState([]);
+  
+  useEffect (() => {
+    fetch (`http://localhost:8088/instructors`)
+    .then((response) => response.json())
+    .then((instructorsArray) => {
+      setInstructors(instructorsArray);
+    });
+  }, []);
+ 
   return (
     <>
       <div className="background">
-        <h2 className="headerInstructorsPage">Instructors Page</h2>
+        <h2 className="HeaderMeetOurInstuctors">Meet Our Instructors!</h2>
 
-        <p className="instructors-info-paragraph">
-          Learn to dance, have fun, and make new friends! Makee lifelong friends in salsa class or on the dance floor! We teach a variety of styles of dance from around the world. Everyone is welcome and we have dance classes for all levels, whether you are a beginner dancer, a social dancer, a competitive hobby dancer, or even a dance professional we can help you along your dance journey.
-          Come join us!
-        </p>
+        <p className="intro-paragraph">
+          This is text page for Meet Our Instructors.
+          </p>
+          <div className="cardContainer">
+          {instructor.map((instructor) => {
+            return (
+              <div class="container" key={`instructor--${instructor.id}`}>
+                <div className="header"> 
+                <h2>{instructor.teacherName}</h2>
+                </div>
+                <div className="body">
+                  <div className="">{instructor.teacherBio}</div>
+                </div>
+     
+              </div>
+            )
+          })
+          }
+          </div>
+ 
       </div>
     </>
   );

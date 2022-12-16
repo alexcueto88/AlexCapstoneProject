@@ -16,8 +16,8 @@ export const InstructorsView = () => {
           </>
         }
       >
-        <Route path="InstructorsPortal" element={<InstructorsPortal />} />
-        <Route path="Home" element={<Home />} />
+        <Route path="/InstructorsPortal" element={<InstructorsPortal />} />
+        {/* <Route path="Home" element={<Home />} /> */}
         {/* <Route path="InstructorsPortal/AddEvent" element={<AddEvent />} />
         <Route path="/Instructor/:attractionsId/edit" element={<EditEventForm />} /> */}
 

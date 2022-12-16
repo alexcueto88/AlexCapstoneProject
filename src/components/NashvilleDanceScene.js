@@ -2,15 +2,20 @@ import { Route, Routes } from "react-router-dom";
 import { Authorized } from "./views/Authorized";
 import { ApplicationViews } from "./views/ApplicationViews";
 import { NavBar } from "./nav/NavBar";
-// import { Login } from "./auth/Login";
-// import { Register } from "./auth/Register";
 import React from "react";
+import { InstructorsView } from "./views/InstructorsView";
+import { InstructorsNavBar } from "./nav/InstructorsNavBar";
+import { Login } from "./auth/Login";
+import { Register } from "./auth/Register";
+
 
 export const NashvilleDanceScene = () => {
   return (
-    <Routes>
+    <Routes> 
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route
-        path="/unauthorized"
+        path="*"
         element={
             <>
               <NavBar />
@@ -24,12 +29,12 @@ export const NashvilleDanceScene = () => {
       <Route path="/register" element={<Register />} /> */}
 
       <Route
-        path="*"
+        path="/"
         element={
           <Authorized>
             <>
-              <NavBar />
-              <ApplicationViews />
+              <InstructorsNavBar />
+              <InstructorsView />
             </>
           </Authorized>
         }

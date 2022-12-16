@@ -5,21 +5,45 @@ import "./AddEventForm.css";
 
 export const AddEvent = () => {
   const [event, setEvent] = useState({
-    eventDescription: "",
-   
+    danceStyle: "",
+    eventName: "",
+    eventDate: "",
+    eventStartTime: "",
+    eventEndTime:"",
+    eventLocation: "",
+    eventPrice: "",
+    eventImage: ""
+           
   });
 
   const navigate = useNavigate();
+  const [danceStyle, setDanceStyle] = useState ([])
 
-  const localProjectUser = localStorage.getItem("project_user");
+  const localProjectUser = localStorage.getItem("capstone_user");
   const projectUserObject = JSON.parse(localProjectUser);
+
+  useEffect (() => {
+    fetch (`http://localhost:8088/danceStyle`)
+    .then((response) => response.json())
+    .then((danceStyleArray) => {
+      setDanceStyle(danceStyleArray);
+    });
+  }, []);
 
   const handleSaveButtonClick = (e) => {
     e.preventDefault();
 
     const eventToSendToAPI = {
-        eventDescription: event.eventDescription
-      
+        danceStyle: event.danceStyle,
+        eventName: event.eventName,
+        eventDate: event.eventDate,
+        eventStartTime: event.eventStartTime,
+        eventEndTime: event.eventEndTime,
+        eventLocation: event.eventLocation,
+        eventPrice: event.eventPrice,
+        eventImage: event.eventImage
+
+        
     };
 
     return fetch(`http://localhost:8088/events`, {
@@ -31,53 +55,57 @@ export const AddEvent = () => {
     })
       .then((response) => response.json())
       .then(() => {
-        navigate("/StaffUpcomingEvents");
+        navigate("/");
       });
   };
 
   return (
     <form className="eventForm">
-      <h2 className="eventForm__title">Add Event</h2>
+      <h3 className="eventForm__title">Add Event</h3>
       <div className="formContainer">
+        
         <fieldset>
           <div className="form-group">
-            <label htmlFor="attractionName">Name:</label>
-            <input
-              required
-              autoFocus
-              type="text"
-              className="form-control"
-              placeholder="Add event name"
-              value={event.attractionName}
-              onChange={(evt) => {
-                const copy = { ...event };
-                copy.attractionName = evt.target.value;
-                setEvent(copy);
-              }}
-            />
+            <label>Dance Style:</label>
+            <select 
+              className="danceStyle-selector"
+              defaultValue={event.danceStyle[0]}
+              onChange={(e) => setDanceStyle(e.target.value)}
+              > 
+              <option value=""> Select Dance Style</option>
+            {danceStyle.map((type) => {
+              return (
+                <option key={type.id} value={type.id}>
+                  {type.danceStyle}
+                </option>
+            )}
+            )}
+             </select>
           </div>
         </fieldset>
+
         <fieldset>
           <div className="form-group">
-            <label htmlFor="description">Description:</label>
+            <label htmlFor="eventName">Event Name:</label>
             <input
               required
               autoFocus
               type="text"
               className="form-control"
-              placeholder="Brief description"
+              placeholder="Enter Event Name Here"
               value={event.description}
               onChange={(evt) => {
                 const copy = { ...event };
-                copy.description = evt.target.value;
+                copy.eventName = evt.target.value;
                 setEvent(copy);
               }}
             />
           </div>
         </fieldset>
+
         <fieldset>
           <div className="form-group">
-            <label htmlFor="date">Date:</label>
+            <label htmlFor="event-date">Event Date:</label>
             <input
               required
               autoFocus
@@ -86,12 +114,87 @@ export const AddEvent = () => {
               value={event.date}
               onChange={(evt) => {
                 const copy = { ...event };
-                copy.date = evt.target.value;
+                copy.eventDate = evt.target.value;
                 setEvent(copy);
               }}
             />
           </div>
         </fieldset>
+
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="event-start-time">Start Time:</label>
+            <input
+              required
+              autoFocus
+              type="time"
+              className="form-control"
+              value={event.eventStartTime}
+              onChange={(evt) => {
+                const copy = { ...event };
+                copy.eventStartTime = evt.target.value;
+                setEvent(copy);
+              }}
+            />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="event-end-time">End Time:</label>
+            <input
+              required
+              autoFocus
+              type="time"
+              className="form-control"
+              value={event.eventEndTime}
+              onChange={(evt) => {
+                const copy = { ...event };
+                copy.eventEndTime = evt.target.value;
+                setEvent(copy);
+              }}
+            />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="event-location">Location:</label>
+            <input
+              required
+              autoFocus
+              type="text"
+              className="form-control"
+              placeholder="Enter Address Here"
+              value={event.eventLocation}
+              onChange={(evt) => {
+                const copy = { ...event };
+                copy.eventLocation = evt.target.value;
+                setEvent(copy);
+              }}
+            />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="event-price">Price:</label>
+            <input
+              required
+              autoFocus
+              type="text" 
+              className="form-control"
+              value={event.eventPrice}
+              onChange={(evt) => {
+                const copy = { ...event };
+                copy.eventPrice = evt.target.value;
+                setEvent(copy);
+              }}
+            />
+          </div>
+        </fieldset>
+
+
         <div className="footer">
           <button
             onClick={(clickEvent) => {

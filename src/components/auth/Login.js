@@ -22,7 +22,7 @@ export const Login = () => {
             })
           );
 
-          navigate("/");
+          navigate("/InstructorsPortal");
         } else {
           window.alert("Invalid login");
         }
