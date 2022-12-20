@@ -1,4 +1,19 @@
 .background {
-    color: blue;
+    border:5px solid white;
+    
+    
+}
+
+.infoParagraph {
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.headerHome {
+    color: rgb(114, 35, 114); 
+    margin-top: 10px;
 
 }

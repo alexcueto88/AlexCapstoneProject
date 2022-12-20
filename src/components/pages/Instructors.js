@@ -18,7 +18,7 @@ export const Instructors = () => {
         <h2 className="HeaderMeetOurInstuctors">Meet Our Instructors!</h2>
 
         <p className="intro-paragraph">
-          This is text page for Meet Our Instructors.
+          Meet Nashville's best dance instructors! Each instructor has their own unique dance technique and style that brings the city alive!
           </p>
           <div className="cardContainer">
           {instructor.map((instructor) => {

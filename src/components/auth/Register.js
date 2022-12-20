@@ -26,6 +26,7 @@ export const Register = (props) => {
             "capstone_user",
             JSON.stringify({
               id: createdUser.id,
+              user: user.staff
             })
           );
 

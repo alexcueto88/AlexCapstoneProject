@@ -15,10 +15,12 @@ export const Login = () => {
       .then((foundUsers) => {
         if (foundUsers.length === 1) {
           const user = foundUsers[0];
+          
           localStorage.setItem(
             "capstone_user",
             JSON.stringify({
               id: user.id,
+              staff: user.staff
             })
           );
 

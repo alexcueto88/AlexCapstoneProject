@@ -1,4 +1,36 @@
-.background {
-    color: green;
+.container {
+    border: 1px solid red;
+    height: 50vh;
+    width: 50vw;
+    }
 
-}
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color:blanchedalmond;
+    min-height: 20px;
+    font-size:25px;
+    color: gold; 
+    margin-bottom:5px;
+    margin-top: 10px;
+    position: relative;    
+    
+
+  }
+  
+  .background {
+    border:5px solid blue;
+    background-image: url(/src/images/logo1.png) !important;
+    background-position: center;
+    background-size: cover;
+
+  }
+
+  .cardContainer {
+    border: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+  }
