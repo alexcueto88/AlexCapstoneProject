@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import "./AddEventForm.css";
 
-export const AddEvent = () => {
-  const [event, setEvent] = useState({
+export const EditEvent = () => {
+  const [event, updateEvent] = useState({
     danceStyle: "",
     eventName: "",
     eventDate: "",
@@ -16,6 +16,7 @@ export const AddEvent = () => {
            
   });
 
+  const {eventId} = useParams()
   const navigate = useNavigate();
   const [danceStyle, setDanceStyle] = useState ([])
 
@@ -30,24 +31,30 @@ export const AddEvent = () => {
     });
   }, []);
 
+  useEffect (() => {
+    fetch (`http://localhost:8088/events?id=${eventId}`)
+    .then((response) => response.json())
+    .then((eventArray) => {
+      updateEvent(eventArray[0]);
+    });
+  }, [eventId]);
+
   const handleSaveButtonClick = (e) => {
     e.preventDefault();
 
-    const eventToSendToAPI = {
-        danceStyle: event.danceStyle,
-        eventName: event.eventName,
-        eventDate: event.eventDate,
-        eventStartTime: event.eventStartTime,
-        eventEndTime: event.eventEndTime,
-        eventLocation: event.eventLocation,
-        eventPrice: event.eventPrice,
-        eventImage: event.eventImage
+const eventToSendToAPI = {
+    danceStyle: event.danceStyle,
+    eventName: event.eventName,
+    eventDate: event.eventDate,
+    eventStartTime: event.eventStartTime,
+    eventEndTime: event.eventEndTime,
+    eventLocation: event.eventLocation,
+    eventPrice: event.eventPrice,
+    eventImage: event.eventImage
+};
 
-        
-    };
-
-    return fetch(`http://localhost:8088/events`, {
-      method: "POST",
+     return fetch(`http://localhost:8088/events/${event.id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -55,7 +62,8 @@ export const AddEvent = () => {
     })
       .then((response) => response.json())
       .then(() => {
-        navigate("/UpcomingEvents");
+        navigate(`/UpcomingEvents`,
+        {replace: true});
         });
   };
 
@@ -69,11 +77,11 @@ export const AddEvent = () => {
             <label>Dance Style:</label>
             <select 
               className="danceStyle-selector"
-              defaultValue={event.danceStyle[0]}
+              value={event.danceStyle}
               onChange={(evt) => {
                 const copy = {...event};
                 copy.danceStyle = evt.target.value;
-                setEvent(copy);
+                updateEvent(copy);
               }}
                 > 
               <option value=""> Select Dance Style</option>
@@ -98,12 +106,12 @@ export const AddEvent = () => {
               type="text"
               className="form-control"
               placeholder="Enter Event Name Here"
-              value={event.description}
+              value={event.eventName}
               // *****************************
               onChange={(evt) => {
                 const copy = { ...event };
                 copy.eventName = evt.target.value;
-                setEvent(copy);
+                updateEvent(copy);
               }}
             />
           </div>
@@ -118,11 +126,11 @@ export const AddEvent = () => {
               autoFocus
               type="date"
               className="form-control"
-              value={event.date}
+              value={event.eventDate}
               onChange={(evt) => {
                 const copy = { ...event };
                 copy.eventDate = evt.target.value;
-                setEvent(copy);
+                updateEvent(copy);
               }}
             />
           </div>
@@ -141,7 +149,7 @@ export const AddEvent = () => {
               onChange={(evt) => {
                 const copy = { ...event };
                 copy.eventStartTime = evt.target.value;
-                setEvent(copy);
+                updateEvent(copy);
               }}
             />
           </div>
@@ -160,12 +168,11 @@ export const AddEvent = () => {
               onChange={(evt) => {
                 const copy = { ...event };
                 copy.eventEndTime = evt.target.value;
-                setEvent(copy);
+                updateEvent(copy);
               }}
             />
           </div>
         </fieldset>
-
         <fieldset>
           <div className="form-group">
             <label htmlFor="event-location">Location:</label>
@@ -180,7 +187,7 @@ export const AddEvent = () => {
               onChange={(evt) => {
                 const copy = { ...event };
                 copy.eventLocation = evt.target.value;
-                setEvent(copy);
+                updateEvent(copy);
               }}
             />
           </div>
@@ -199,7 +206,7 @@ export const AddEvent = () => {
               onChange={(evt) => {
                 const copy = { ...event };
                 copy.eventPrice = evt.target.value;
-                setEvent(copy);
+                updateEvent(copy);
               }}
             />
           </div>
@@ -213,7 +220,7 @@ export const AddEvent = () => {
               handleSaveButtonClick(clickEvent);
             }}
           >
-            Add Event
+            Edit Event
           </button>
         </div>
       </div>
